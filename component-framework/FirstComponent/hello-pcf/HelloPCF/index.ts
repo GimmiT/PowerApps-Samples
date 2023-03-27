@@ -1,4 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
+import { EventListener } from "../node_modules/typescript/lib/lib.dom";
 
 export class HelloPCF implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
@@ -10,6 +11,8 @@ export class HelloPCF implements ComponentFramework.StandardControl<IInputs, IOu
     private notifyOutputChanged: () => void;
     // Flag to track if the component is in edit mode or not\
     private isEditMode: boolean;
+    // Tracks the event handler so we can destroy it when done
+    private buttonClickHandler: EventListener;
     // Tracking variable for the name property\
     private name: string | null;
 
