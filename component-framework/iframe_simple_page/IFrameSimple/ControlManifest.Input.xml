@@ -32,8 +32,8 @@
     -->
     <resources>
       <code path="index.ts" order="1"/>
-      <!-- UNCOMMENT TO ADD MORE RESOURCES
       <css path="css/IFrameSimple.css" order="1" />
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
       <resx path="strings/IFrameSimple.1033.resx" version="1.0.0" />
       -->
     </resources>

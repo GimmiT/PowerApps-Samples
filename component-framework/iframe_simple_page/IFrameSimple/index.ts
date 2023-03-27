@@ -2,6 +2,10 @@ import {IInputs, IOutputs} from "./generated/ManifestTypes";
 
 export class IFrameSimple implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
+    private _SiteIFrame: HTMLElement;
+    private _container: HTMLDivElement;
+    private _controlViewRendered: boolean;
+
     /**
      * Empty constructor.
      */
@@ -9,6 +13,7 @@ export class IFrameSimple implements ComponentFramework.StandardControl<IInputs,
     {
 
     }
+
 
     /**
      * Used to initialize the control instance. Controls can kick off remote server calls and other initialization actions here.
@@ -18,10 +23,10 @@ export class IFrameSimple implements ComponentFramework.StandardControl<IInputs,
      * @param state A piece of data that persists in one session for a single user. Can be set at any point in a controls life cycle by calling 'setControlState' in the Mode interface.
      * @param container If a control is marked control-type='standard', it will receive an empty div element within which it can render its content.
      */
-    public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container:HTMLDivElement): void
-    {
-        // Add control initialization code
-    }
+    public init (context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement): void {
+		this._container = container;
+		this._controlViewRendered = false;
+	}
 
 
     /**
@@ -30,8 +35,28 @@ export class IFrameSimple implements ComponentFramework.StandardControl<IInputs,
      */
     public updateView(context: ComponentFramework.Context<IInputs>): void
     {
-        // Add code to update control view
+        if (!this._controlViewRendered) {
+			this._controlViewRendered = true;
+			this.renderIFrame();
+		}
     }
+
+    /** 
+	 * Render IFrame HTML Element that hosts the Bing Map and appends the IFrame to the control container 
+	 */
+	private renderIFrame(): void {
+		this._SiteIFrame = this.createIFrameElement();
+		this._container.appendChild(this._SiteIFrame);
+	}   
+
+	/** 
+	 * Helper method to create an IFrame HTML Element
+	 */
+	private createIFrameElement(): HTMLElement {
+		const iFrameElement: HTMLElement = document.createElement("iframe");
+		iFrameElement.setAttribute("class", "SampleControl_IFrame");
+		return iFrameElement;
+	}
 
     /**
      * It is called by the framework prior to a control receiving new data.

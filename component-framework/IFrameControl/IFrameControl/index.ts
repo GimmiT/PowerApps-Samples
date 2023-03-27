@@ -18,7 +18,7 @@ export class IFrameControl implements ComponentFramework.StandardControl<IInputs
 	private _bingMapIFrame: HTMLElement;
 
 	// Reference to the control container HTMLDivElement
-	// This element contains all elements of our custom control example
+	// This element contains all elements of our custom§rol example
 	private _container: HTMLDivElement;
 
 	// Flag if control view has been rendered
