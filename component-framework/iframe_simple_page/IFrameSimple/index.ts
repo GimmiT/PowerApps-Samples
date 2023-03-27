@@ -39,10 +39,24 @@ export class IFrameSimple implements ComponentFramework.StandardControl<IInputs,
 			this._controlViewRendered = true;
 			this.renderIFrame();
 		}
+        // Build the entire URL with the user provided latitude and longitude
+        if (context.parameters.Website_Link.raw == null)
+        {
+            const iFrameSrc = "https://www.buhlergroup.com/content/buhlergroup/global/de/homepage.html"
+            // Update the IFrame to point to the updated URL
+            this._SiteIFrame.setAttribute("src", iFrameSrc);
+        }
+        else
+        {
+            const iFrameSrc = context.parameters.Website_Link.raw;
+            // Update the IFrame to point to the updated URL
+            this._SiteIFrame.setAttribute("src", iFrameSrc);
+        }
+        
     }
 
     /** 
-	 * Render IFrame HTML Element that hosts the Bing Map and appends the IFrame to the control container 
+	 * Render IFrame HTML Element that hosts the Site and appends the IFrame to the control container 
 	 */
 	private renderIFrame(): void {
 		this._SiteIFrame = this.createIFrameElement();
@@ -57,6 +71,8 @@ export class IFrameSimple implements ComponentFramework.StandardControl<IInputs,
 		iFrameElement.setAttribute("class", "SampleControl_IFrame");
 		return iFrameElement;
 	}
+
+	
 
     /**
      * It is called by the framework prior to a control receiving new data.
